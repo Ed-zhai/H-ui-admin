@@ -18,10 +18,12 @@ import java.util.List;
  */
 public class MyRealm extends AuthorizingRealm {
 
-    private SysUserService sysUserService = new SysUserServiceImpl();
+    @Resource
+    private SysUserService sysUserService ;
 
     @Override
     public String getName() {
+
         return "realm";
     }
 
@@ -35,11 +37,12 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
+
         String username = (String) authenticationToken.getPrincipal();
 
         SysUser sysUser = sysUserService.selectByName(username);
 
-        if (username == null || username.trim().equals("") || sysUser == null) {
+        if (username == null || username.trim().equals("")||sysUser == null) {
 
             throw new UnknownAccountException("用户名错误");
         }
@@ -72,4 +75,5 @@ public class MyRealm extends AuthorizingRealm {
 
         return info;
     }
+
 }

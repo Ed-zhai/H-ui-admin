@@ -12,11 +12,13 @@ public class MainController {
 
     @RequestMapping(value = "/index")
     public String frontPage() {
+
         return "index";
     }
 
     @RequestMapping(value = "/welcome")
     public String welcome() {
+
         return "welcome";
     }
 

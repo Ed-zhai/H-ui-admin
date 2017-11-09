@@ -1,13 +1,14 @@
 package com.lanou.controller;
 
+import com.lanou.bean.SysUser;
 import com.lanou.utils.AjaxResult;
 import com.lanou.utils.VerifyCode;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +28,7 @@ public class SysUserController {
     @RequestMapping(value = "/login")
     public String login() {
 
-        if(SecurityUtils.getSubject().isAuthenticated()){
+        if (SecurityUtils.getSubject().isAuthenticated()) {
 
             return "index";
         }
@@ -39,7 +40,7 @@ public class SysUserController {
     @RequestMapping(value = "/logout")
     public String logout() {
 
-        if(SecurityUtils.getSubject().isAuthenticated()){
+        if (SecurityUtils.getSubject().isAuthenticated()) {
 
             SecurityUtils.getSubject().logout();
         }
@@ -49,35 +50,34 @@ public class SysUserController {
 
     //用户登录表单验证
     @ResponseBody
-    @RequestMapping(value = "/loginSubmit",method = RequestMethod.POST)
-    public AjaxResult loginSubmit(@RequestParam("verifyCode") String verifyCode,HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/loginSubmit")
+    public AjaxResult loginSubmit(SysUser sysUser, @RequestParam("verifyCode") String verifyCode, HttpServletRequest request){
 
-        //shiro在认证过程中出现错误后,将异常类路径通过request返回
+        Subject subject = SecurityUtils.getSubject();
 
-        String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+        UsernamePasswordToken token = new UsernamePasswordToken(sysUser.getUsername(), sysUser.getPassword());
 
-        if (exceptionClassName.equals(UnknownAccountException.class.getName())) {
+        try {
+
+            subject.login(token);
+
+            //获取生成验证码图片时保存的验证字符串对象
+            String srcVerifyCode = (String) request.getSession().getAttribute("verifyCode");
+
+            //提交的验证码与session保存的进行比较,如果不一致,加入错误信息.
+            if (!verifyCode.equalsIgnoreCase(srcVerifyCode)) {
+
+                return new AjaxResult(2);
+            }
+
+        } catch (AuthenticationException e) {
+
 
             return new AjaxResult(1);
-
-        } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-
-            return new AjaxResult(2);
-
         }
-        //获取生成验证码图片时保存的验证字符串对象
-        String srcVerifyCode = (String) request.getSession().getAttribute("verifyCode");
 
-        //表单提交的验证码与session保存的进行比较,如果不一致,加入错误信息.
-        if (!verifyCode.equalsIgnoreCase(srcVerifyCode)) {
-
-            return new AjaxResult(3);
-        }
-        System.out.println(1111);
-        return new AjaxResult(4);
-
-
-}
+        return new AjaxResult(3);
+    }
 
     //验证码的刷新与判定
     @ResponseBody

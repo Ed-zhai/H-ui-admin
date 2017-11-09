@@ -39,8 +39,6 @@
                 <!--退出,请求logout可以直接退出-->
                 /logout = logout
 
-                /error = anon
-
                 <!--如果需要多个过滤器,需要逗号隔开-->
                 /items/query = roles[admin],user
                 <!--/**代表除了上述请求外的所有请求都需要认证才可以访问-->
@@ -64,5 +62,6 @@
         <property name="passwordParam" value="password"></property>
 
         <property name="loginUrl" value="/loginSubmit"></property>
+
     </bean>
 </beans>
