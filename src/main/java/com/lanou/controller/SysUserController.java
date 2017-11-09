@@ -73,8 +73,11 @@ public class SysUserController {
 
             return new AjaxResult(3);
         }
+        System.out.println(1111);
         return new AjaxResult(4);
-    }
+
+
+}
 
     //验证码的刷新与判定
     @ResponseBody
