@@ -19,7 +19,12 @@
 
         <property name="filterChainDefinitions">
             <value>
-                /lib/**=anon
+                /lib/jquery/**=anon
+                /lib/jquery.contextmenu/**=anon
+                /lib/jquery.SuperSlide/**=anon
+                /lib/jquery.validation/**=anon
+                /lib/Hui-iconfont/**=anon
+                /lib/js/**=anon
                 /static/h-ui/js/** = anon
                 /static/h-ui/css/** = anon
                 /static/h-ui.admin/js/** = anon

@@ -32,7 +32,7 @@ public class SysUserController {
             return "index";
         }
 
-        return "login2";
+        return "login";
     }
 
     //用户登出
