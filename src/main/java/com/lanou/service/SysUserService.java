@@ -1,5 +1,6 @@
 package com.lanou.service;
 
+import com.github.pagehelper.PageInfo;
 import com.lanou.bean.SysUser;
 
 /**
@@ -20,4 +21,6 @@ public interface SysUserService {
     int updateById(SysUser record);
 
     SysUser selectByName(String username);
+
+    PageInfo<SysUser> findAllSysUsersWithPageInfo(Integer pageNo, Integer pageSize);
 }

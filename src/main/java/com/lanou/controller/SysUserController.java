@@ -1,6 +1,8 @@
 package com.lanou.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.lanou.bean.SysUser;
+import com.lanou.service.SysUserService;
 import com.lanou.utils.AjaxResult;
 import com.lanou.utils.VerifyCode;
 import org.apache.shiro.SecurityUtils;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +26,10 @@ import java.io.IOException;
  */
 @Controller
 public class SysUserController {
+
+    @Resource
+    private SysUserService sysUserService;
+
 
     //用户登录页面
     @RequestMapping(value = "/login")
@@ -51,7 +58,7 @@ public class SysUserController {
     //用户登录表单验证
     @ResponseBody
     @RequestMapping(value = "/loginSubmit")
-    public AjaxResult loginSubmit(SysUser sysUser, @RequestParam("verifyCode") String verifyCode, HttpServletRequest request){
+    public AjaxResult loginSubmit(SysUser sysUser, @RequestParam("verifyCode") String verifyCode, HttpServletRequest request) {
 
         Subject subject = SecurityUtils.getSubject();
 
@@ -93,5 +100,20 @@ public class SysUserController {
         ServletOutputStream os = response.getOutputStream();
         VerifyCode.output(image, os);//将图片映射到输出流中
         return new AjaxResult();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/pageInfo")
+    public PageInfo<SysUser> sysUserPageInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, Integer flag) {
+        if (flag == 0) {
+            return sysUserService.findAllSysUsersWithPageInfo(pageNo, pageSize);
+        } else {
+            return sysUserService.findAllSysUsersWithPageInfo(pageNo, pageSize);
+        }
+    }
+
+    @RequestMapping(value = "/admin-add")
+    public String adminAdd() {
+        return "admin-add";
     }
 }

@@ -1,9 +1,10 @@
 package com.lanou.controller;
 
-import com.lanou.utils.AjaxResult;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 /**
  * Created by dllo on 17/11/8.
@@ -24,18 +25,20 @@ public class MainController {
         return "welcome";
     }
 
-    @RequestMapping(value = "/adminrole")
+    @RequestMapping(value = "/admin-role")
     public String adminrole() {
 
         return "admin-role";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/adminRole")
-    public AjaxResult adminRole() {
-
-        return new AjaxResult(1);
+    @RequestMapping(value = "/admin-permission")
+    public String adminPermission() {
+        return "admin-permission";
     }
 
+    @RequestMapping(value = "/admin-list")
+    public String adminList() {
+        return "admin-list";
+    }
 
 }

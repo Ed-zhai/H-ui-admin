@@ -39,6 +39,10 @@
     SELECT <include refid="Base_Column_List"/>
     FROM sys_user WHERE username = #{username}
   </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM sys_user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}

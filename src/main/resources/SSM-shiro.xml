@@ -51,7 +51,11 @@
     <bean id="myRealm" class="com.lanou.shiro.MyRealm"></bean>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+
         <property name="realm" ref="myRealm"></property>
+
+        <property name="rememberMeManager" ref="rememberMeManager"></property>
+
     </bean>
 
     <!--基于form表单的身份认证过滤器,如果不配置也会自动注册,表单中的用户账号/密码/loginURL将采用默认值,建议配置-->
@@ -61,7 +65,21 @@
 
         <property name="passwordParam" value="password"></property>
 
+        <property name="rememberMeParam" value="rememberMe" />
+
         <property name="loginUrl" value="/loginSubmit"></property>
 
+    </bean>
+    <!-- remenberMe配置 -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe" />
+        <property name="httpOnly" value="true" />
+        <!-- 默认记住7天（单位：秒） -->
+        <property name="maxAge" value="604800" />
+    </bean>
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+        <property name="cookie" ref="rememberMeCookie" />
     </bean>
 </beans>
