@@ -8814,6 +8814,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
     cursor: pointer
 }
 
+
 .label-default, .badge-default {
     background-color: #e6e6e6;
     color: #333

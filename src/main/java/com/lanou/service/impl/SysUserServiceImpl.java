@@ -75,4 +75,21 @@ public class SysUserServiceImpl implements SysUserService {
 
         return pageInfo;
     }
+
+    @Override
+    public PageInfo<SysUser> findAllSysUsersBySearch(Integer pageNo, Integer pageSize, String datemin, String datemax, String username) {
+
+        pageNo = pageNo == null ? 1 : pageNo;
+
+        pageSize = pageSize == null ? 5 : pageSize;
+
+        PageHelper.startPage(pageNo, pageSize);
+
+        List<SysUser> sysUserList = sysUserMapper.findBySearch(datemin,datemax,username);
+
+        PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(sysUserList);
+
+        return pageInfo;
+
+    }
 }

@@ -33,12 +33,20 @@ public class MainController {
 
     @RequestMapping(value = "/admin-permission")
     public String adminPermission() {
+
         return "admin-permission";
     }
 
     @RequestMapping(value = "/admin-list")
     public String adminList() {
+
         return "admin-list";
+    }
+
+    @RequestMapping(value = "/404")
+    public String errorPage() {
+
+        return "404";
     }
 
 }

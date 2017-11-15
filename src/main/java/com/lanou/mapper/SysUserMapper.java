@@ -1,6 +1,7 @@
 package com.lanou.mapper;
 
 import com.lanou.bean.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface SysUserMapper {
     SysUser selectByName(String username);
 
     List<SysUser> findAll();
+
+    List<SysUser> findBySearch(@Param("datemin") String datemin,@Param("datemax") String datemax,@Param("username") String username);
 }

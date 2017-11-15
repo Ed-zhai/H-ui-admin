@@ -1,6 +1,6 @@
 package com.lanou.bean;
 
-import java.util.Date;
+import java.util.List;
 
 public class SysUser {
     private Integer id;
@@ -19,7 +19,7 @@ public class SysUser {
 
     private String thirdId;
 
-    private Date endTime;
+    private String endTime;
 
     private String email;
 
@@ -37,13 +37,15 @@ public class SysUser {
 
     private Integer createSiteId;
 
-    private Date createTime;
+    private String createTime;
 
     private Integer createId;
 
-    private Date updateTime;
+    private String updateTime;
 
     private Integer updateId;
+
+    private List<SysRole> sysRoleList;
 
     public Integer getId() {
         return id;
@@ -109,12 +111,28 @@ public class SysUser {
         this.thirdId = thirdId == null ? null : thirdId.trim();
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
     }
 
     public String getEmail() {
@@ -181,14 +199,6 @@ public class SysUser {
         this.createSiteId = createSiteId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     public Integer getCreateId() {
         return createId;
     }
@@ -197,20 +207,20 @@ public class SysUser {
         this.createId = createId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public Integer getUpdateId() {
         return updateId;
     }
 
     public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
+    }
+
+    public List<SysRole> getSysRoleList() {
+        return sysRoleList;
+    }
+
+    public void setSysRoleList(List<SysRole> sysRoleList) {
+        this.sysRoleList = sysRoleList;
     }
 
     @Override
@@ -224,7 +234,7 @@ public class SysUser {
                 ", usertype=" + usertype +
                 ", state=" + state +
                 ", thirdId='" + thirdId + '\'' +
-                ", endTime=" + endTime +
+                ", endTime='" + endTime + '\'' +
                 ", email='" + email + '\'' +
                 ", tel='" + tel + '\'' +
                 ", address='" + address + '\'' +
@@ -233,10 +243,11 @@ public class SysUser {
                 ", theme='" + theme + '\'' +
                 ", backSiteId=" + backSiteId +
                 ", createSiteId=" + createSiteId +
-                ", createTime=" + createTime +
+                ", createTime='" + createTime + '\'' +
                 ", createId=" + createId +
-                ", updateTime=" + updateTime +
+                ", updateTime='" + updateTime + '\'' +
                 ", updateId=" + updateId +
+                ", sysRoleList=" + sysRoleList +
                 '}';
     }
 }

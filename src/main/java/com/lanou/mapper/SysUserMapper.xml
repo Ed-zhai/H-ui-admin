@@ -10,7 +10,7 @@
     <result column="usertype" jdbcType="INTEGER" property="usertype" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="third_id" jdbcType="VARCHAR" property="thirdId" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="address" jdbcType="VARCHAR" property="address" />
@@ -19,10 +19,11 @@
     <result column="theme" jdbcType="VARCHAR" property="theme" />
     <result column="back_site_id" jdbcType="INTEGER" property="backSiteId" />
     <result column="create_site_id" jdbcType="INTEGER" property="createSiteId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="create_id" jdbcType="INTEGER" property="createId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
     <result column="update_id" jdbcType="INTEGER" property="updateId" />
+    <collection property="sysRoleList" column="role_id" javaType="ArrayList" select="com.lanou.mapper.SysRoleMapper.findRolesByRoleId"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, username, password, realname, role_id, usertype, state, third_id, end_time, email,
@@ -43,6 +44,24 @@
     SELECT <include refid="Base_Column_List"/>
     FROM sys_user
   </select>
+
+  <select id="findBySearch" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM sys_user
+    <where>
+      <if test="datemin != null and datemin != ''">
+        AND create_time >= #{datemin}
+      </if>
+      <if test="datemax != null and datemax != ''">
+        AND #{datemax} >= create_time
+      </if>
+      <if test="username != null and username != ''">
+        AND username LIKE CONCAT('%', #{username},'%')
+      </if>
+
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
@@ -58,11 +77,11 @@
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realname,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, 
-      #{state,jdbcType=INTEGER}, #{thirdId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{thirdId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{titleUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR}, 
-      #{backSiteId,jdbcType=INTEGER}, #{createSiteId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}
+      #{backSiteId,jdbcType=INTEGER}, #{createSiteId,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR},
+      #{createId,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, #{updateId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lanou.bean.SysUser">
@@ -158,7 +177,7 @@
         #{thirdId,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -185,13 +204,13 @@
         #{createSiteId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createId != null">
         #{createId,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateId != null">
         #{updateId,jdbcType=INTEGER},
@@ -223,7 +242,7 @@
         third_id = #{thirdId,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -250,13 +269,13 @@
         create_site_id = #{createSiteId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createId != null">
         create_id = #{createId,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateId != null">
         update_id = #{updateId,jdbcType=INTEGER},
@@ -273,7 +292,7 @@
       usertype = #{usertype,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       third_id = #{thirdId,jdbcType=VARCHAR},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
@@ -282,9 +301,9 @@
       theme = #{theme,jdbcType=VARCHAR},
       back_site_id = #{backSiteId,jdbcType=INTEGER},
       create_site_id = #{createSiteId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=VARCHAR},
       create_id = #{createId,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=VARCHAR},
       update_id = #{updateId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -23,4 +23,6 @@ public interface SysUserService {
     SysUser selectByName(String username);
 
     PageInfo<SysUser> findAllSysUsersWithPageInfo(Integer pageNo, Integer pageSize);
+
+    PageInfo<SysUser> findAllSysUsersBySearch(Integer pageNo, Integer pageSize, String datemin, String datemax, String username);
 }
