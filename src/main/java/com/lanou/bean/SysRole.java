@@ -1,6 +1,7 @@
 package com.lanou.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
     private Integer id;
@@ -20,6 +21,25 @@ public class SysRole {
     private Integer updateId;
 
     private String remark;
+
+    private List<SysUser> sysUsers;
+    private List<SysMenu> sysMenus;
+
+    public List<SysMenu> getSysMenus() {
+        return sysMenus;
+    }
+
+    public void setSysMenus(List<SysMenu> sysMenus) {
+        this.sysMenus = sysMenus;
+    }
+
+    public List<SysUser> getSysUsers() {
+        return sysUsers;
+    }
+
+    public void setSysUsers(List<SysUser> sysUsers) {
+        this.sysUsers = sysUsers;
+    }
 
     public Integer getId() {
         return id;

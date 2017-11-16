@@ -1,10 +1,9 @@
 package com.lanou.controller;
 
-
+import com.lanou.utils.AjaxResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by dllo on 17/11/8.
@@ -35,6 +34,10 @@ public class MainController {
     public String adminPermission() {
 
         return "admin-permission";
+    //    去咨询管理页面
+    @RequestMapping(value = "/articleList")
+    public String articleList(){
+        return "article-list";
     }
 
     @RequestMapping(value = "/admin-list")

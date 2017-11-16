@@ -6,30 +6,38 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_id" jdbcType="INTEGER" property="createId" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_id" jdbcType="INTEGER" property="updateId" />
     <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+
+    <collection property="sysUsers" column="id" javaType="ArrayList" select="com.lanou.mapper.SysUserMapper.selectByRoleId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, status, sort, create_time, create_id, update_time, update_id ,remark
+    id, name, status, sort, create_time, create_id, update_time, update_id , remark
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+
     from sys_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="findRolesByRoleId" resultMap="BaseResultMap">
+  <select id="selectAllRole"  resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+  *
     from sys_role
-    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_role
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteRoleMenuByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role_menu
+    where roleid = #{roleid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanou.bean.SysRole">
     insert into sys_role (id, name, status, 
@@ -37,8 +45,15 @@
       update_time, update_id, remark
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER},
-      #{updateTime,jdbcType=VARCHAR}, #{updateId,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}
+      #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <insert id="insertRoleMenu" >
+    insert into sys_role_menu (roleid,menuid
+      )
+    values (#{roleid}, #{menuid}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lanou.bean.SysRole">

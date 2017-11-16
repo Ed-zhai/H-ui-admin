@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -13,6 +15,7 @@ public interface SysUserMapper {
     int insertSelective(SysUser record);
 
     SysUser selectByPrimaryKey(Integer id);
+    List<SysUser> selectByRoleId(Integer id);
 
     int updateByPrimaryKeySelective(SysUser record);
 
