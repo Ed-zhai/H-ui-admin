@@ -39,7 +39,7 @@
         <!-- !!!! Table Configurations !!!! -->
         <!--<table tableName="area" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--enableUpdateByExample="false"/>-->
-        <table tableName="sys_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="sys_menu" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

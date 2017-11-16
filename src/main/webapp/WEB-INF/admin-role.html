@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -24,54 +25,37 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray"> <span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加角色','admin-role-add.html','800')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray"> <span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;"  onclick="admin_role_add('添加角色','/roleAdd','1000','800')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a> </span> <span class="r" id="total">共有数据：</span> </div>
 	<table class="table table-border table-bordered table-hover table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="6">角色管理</th>
+				<th scope="col" colspan="7">角色管理</th>
 			</tr>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" value="" name=""></th>
-				<th width="40">ID</th>
-				<th width="200">角色名</th>
-				<th>用户列表</th>
-				<th width="300">描述</th>
-				<th width="70">操作</th>
+				<!--<th width="40">ID</th>-->
+				<th width="200">名称</th>
+				<th width="300">创建时间</th>
+				<th width="300">创始人</th>
+				<th width="200">排序</th>
+				<th width="200">状态</th>
+				<th width="200">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr class="text-c">
-				<td><input type="checkbox" value="" name=""></td>
-				<td>1</td>
-				<td>超级管理员</td>
-				<td><a href="#">admin</a></td>
-				<td>拥有至高无上的权利</td>
-				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
-			<tr class="text-c">
-				<td><input type="checkbox" value="" name=""></td>
-				<td>2</td>
-				<td>总编</td>
-				<td><a href="#">张三</a></td>
-				<td>具有添加、审核、发布、删除内容的权限</td>
-				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','2')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
-			<tr class="text-c">
-				<td><input type="checkbox" value="" name=""></td>
-				<td>3</td>
-				<td>栏目主辑</td>
-				<td><a href="#">李四</a>，<a href="#">王五</a></td>
-				<td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','3')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
-			<tr class="text-c">
-				<td><input type="checkbox" value="" name=""></td>
-				<td>4</td>
-				<td>栏目编辑</td>
-				<td><a href="#">赵六</a>，<a href="#">钱七</a></td>
-				<td>只对所在栏目具有添加、删除草稿等权利。</td>
-				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','4')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
+		<tbody id="tbody">
+			<!--<tr class="text-c">-->
+				<!--<td><input type="checkbox" value="" name=""></td>-->
+				<!--<td>1</td>-->
+				<!--<td>超级管理员</td>-->
+				<!--<td><a href="#">admin</a></td>-->
+				<!--<td>拥有至高无上的权利</td>-->
+				<!--<td class="f-14">-->
+					<!--<a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none">-->
+						<!--<i class="Hui-iconfont">&#xe6df;</i></a>-->
+					<!--<a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none">-->
+						<!--<i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+			<!--</tr>-->
+
 		</tbody>
 	</table>
 </div>
@@ -84,24 +68,123 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
+
+	//批量删除
+	function datadel() {
+
+        var roleIdList = [];
+
+        $("input:checked").each(function () {
+            roleIdList.push($(this).attr("num"))
+        })
+		        $.ajax({
+		            url:"/datadel",
+					traditional:true,
+					data:{
+		              idList:roleIdList
+					},
+					success:function (result) {
+
+                    }
+				})
+
+		window.location.href="";
+	}
+	//删除
+	var roledelete=function () {
+        $.ajax({
+            url:"/roledel",
+            data:{
+                id:$(this).attr("num")
+            },
+            success:function (result) {
+                window.location.href="";
+            }
+        })
+
+    }
+
+
+
+//    显示所有
+	function selectAllRoles() {
+
+		$.ajax({
+		    url:"/selectAllRoles",
+			success:function (result) {
+
+		        var sysRoles = result.data;
+		       var span =$("<strong></strong>").html(sysRoles.length+"条");
+		         $("#total").append(span);
+
+
+                for (var i=0;i<sysRoles.length;i++){
+
+                  addBody(sysRoles[i]);
+			  }
+            }
+		})
+    }
+
+    selectAllRoles();
+	function addBody(sysRole) {
+		var tr=$("<tr class='text-c'></tr>");
+		var td1=$("<td></td>").appendTo(tr);
+		$("<input type='checkbox' class='checkbox'>").appendTo(td1).attr("num",sysRole.id);
+//		$("<td></td>").html(sysRole.id).appendTo(tr);
+		$("<td></td>").html(sysRole.name).appendTo(tr);
+//		var td2=$("<td></td>").appendTo(tr);
+//		for (var i=0;i<sysRole.sysUsers.length;i++){
+//		    $("<a href='#'></a>").html(sysRole.sysUsers[i].username).appendTo(td2);
+//		}
+        $("<td></td>").html(sysRole.createTime).appendTo(tr);
+        $("<td></td>").html("admin").appendTo(tr);
+        $("<td></td>").html(0).appendTo(tr);
+        $("<td></td>").html(sysRole.status).appendTo(tr);
+       var td3= $("<td class='f-14'></td>").appendTo(tr);
+         var a1=$("<a title='编辑' href='javascript:;'  style='text-decoration:none'></a>").click(admin_role_edit).attr("title",'角色编辑').attr("url",'/roleAdd').attr("id",sysRole.id).appendTo(td3);
+         var a2=$("<a title='删除' href='javascript:;' class='ml-5' style='text-decoration:none'></a>").attr("num",sysRole.id).click(roledelete).appendTo(td3);
+
+         $("<i class='Hui-iconfont'>&#xe6df;</i>").appendTo(a1);
+		$("<i class='Hui-iconfont'>&#xe6e2;</i>").appendTo(a2);
+
+		$("#tbody").append(tr);
+    }
+
 /*管理员-角色-添加*/
 function admin_role_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 /*管理员-角色-编辑*/
-function admin_role_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
+var  admin_role_edit=function(){
+          var title=$(this).attr("title");
+        var   url=$(this).attr("url");
+    $.ajax({
+        url:"/rollBack",
+		data:{
+        id:this.id
+		},
+		success:function (result) {
+
+            layer_show(title,url,"1000","800");
+        }
+	});
+
 }
 /*管理员-角色-删除*/
-function admin_role_del(obj,id){
+var admin_role_del=function (){
+
 	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
 		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
+//			type: 'POST',
+			url: "/roledel",
+//			dataType: 'json',
+			data:{
+			    id:$(this).attr("num")
+			},
 			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
+				window.location.href="";
+
 			},
 			error:function(data) {
 				console.log(data.msg);

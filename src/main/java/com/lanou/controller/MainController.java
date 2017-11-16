@@ -30,11 +30,10 @@ public class MainController {
         return "admin-role";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/adminRole")
-    public AjaxResult adminRole() {
-
-        return new AjaxResult(1);
+    //    去咨询管理页面
+    @RequestMapping(value = "/articleList")
+    public String articleList(){
+        return "article-list";
     }
 
 
