@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,13 +29,6 @@ public class SysRoleController {
     public String addRole(){
         return "admin-role-add";
     }
-
-    //    去404页面
-    @RequestMapping(value = "/404")
-    public String fZF(){
-        return "404";
-    }
-
 
 
     //找到所有Role
@@ -96,7 +90,7 @@ request.getSession().setAttribute("sysRole",sysRole1 );
 
 //存入role表
         sysRole.setStatus(1);
-        sysRole.setCreateTime(new Date());
+        sysRole.setCreateTime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
         sysRoleSerivce.insertSelective(sysRole);
         System.out.println(11);
         for (Integer menuId : menuIdList) {

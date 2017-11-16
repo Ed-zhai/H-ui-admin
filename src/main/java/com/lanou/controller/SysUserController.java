@@ -33,7 +33,6 @@ public class SysUserController {
     @Resource
     private SysUserService sysUserService;
 
-
     //用户登录页面
     @RequestMapping(value = "/login")
     public String login() {
@@ -207,7 +206,7 @@ public class SysUserController {
 
     //批量删除用户
     @ResponseBody
-    @RequestMapping(value = "/datadel")
+    @RequestMapping(value = "/dataDelete")
     public AjaxResult dataDel(@RequestParam("ids") Integer[] ids) {
 
         for (Integer id : ids) {

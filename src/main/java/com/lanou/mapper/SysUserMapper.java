@@ -15,7 +15,6 @@ public interface SysUserMapper {
     int insertSelective(SysUser record);
 
     SysUser selectByPrimaryKey(Integer id);
-    List<SysUser> selectByRoleId(Integer id);
 
     int updateByPrimaryKeySelective(SysUser record);
 

@@ -89,9 +89,9 @@
                 <ul>
                     <li><a data-href="/articleList" data-title="菜单管理" href="javascript:void(0)">菜单管理</a></li>
                 </ul> <ul>
-                    <li><a data-href="/adminrole" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+                    <li><a data-href="/admin-role" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
                 </ul> <ul>
-                    <li><a data-href="/articleList" data-title="用户管理" href="javascript:void(0)">用户管理</a></li>
+                    <li><a data-href="/admin-list" data-title="用户管理" href="javascript:void(0)">用户管理</a></li>
                 </ul>
             </dd>
         </dl>
@@ -217,17 +217,6 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
-    $("#adminRole").click(function () {
-        $.ajax({
-            url:"/adminRole",
-            success:function (result) {
-                if (result.data ==1 ){
-                    window.location.href="/adminrole";
-                }
-            }
-        })
-    })
-
     $(function () {
         /*$("#min_title_list li").contextMenu('Huiadminmenu', {
          bindings: {

@@ -1,6 +1,5 @@
 package com.lanou.bean;
 
-import java.util.Date;
 import java.util.List;
 
 public class SysRole {
