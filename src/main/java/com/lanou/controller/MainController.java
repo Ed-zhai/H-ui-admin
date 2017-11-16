@@ -13,6 +13,7 @@ public class MainController {
     @RequestMapping(value = "/index")
     public String frontPage() {
 
+        System.out.println("111:--");
         return "index";
     }
 
