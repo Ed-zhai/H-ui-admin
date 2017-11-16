@@ -2,6 +2,8 @@ package com.lanou.mapper;
 
 import com.lanou.bean.SysMenu;
 
+import java.util.List;
+
 public interface SysMenuMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,7 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+
+    //查询全部
+    List<SysMenu> findAllMenu();
 }

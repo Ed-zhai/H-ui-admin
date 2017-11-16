@@ -27,6 +27,14 @@
     from sys_menu
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--查询全部-->
+  <select id="findAllMenu" resultMap="BaseResultMap" useCache="true">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM sys_menu
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_menu
     where id = #{id,jdbcType=INTEGER}
